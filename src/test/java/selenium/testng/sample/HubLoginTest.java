@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.By.cssSelector;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class HubLoginTest {
 
@@ -57,7 +58,9 @@ public class HubLoginTest {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id("intro-box")));
 
         // assert page elements
-        assertElementText(cssSelector("#intro-box > div.indexcss__StyledGreeting-sc-1lqr3q4-2.jXcJqq"), "Good night,\nPedro Almodovar!");
+        WebElement greetingElement = driver.findElement(cssSelector("#intro-box > div.indexcss__StyledGreeting-sc-1lqr3q4-2.jXcJqq"));
+        assertTrue(greetingElement.getText().contains("Pedro Almodovar"));
+
         assertElementText(cssSelector("div[data-testid='accordion-title-recent']"), "RECENT");
         assertElementText(cssSelector("div[data-testid='accordion-title-team-chat']"), "TEAM CHAT");
         assertElementText(cssSelector("div[data-testid='accordion-title-1:1']"), "1:1");
